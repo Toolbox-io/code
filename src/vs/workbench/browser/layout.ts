@@ -703,26 +703,8 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		};
 
 		// Sidebar View Container To Restore
-		if (this.isVisible(Parts.SIDEBAR_PART)) {
-
-			// Only restore last viewlet if window was reloaded or we are in development mode
-			let viewContainerToRestore: string | undefined;
-			if (
-				!this.environmentService.isBuilt ||
-				lifecycleService.startupKind === StartupKind.ReloadedWindow ||
-				this.environmentService.isExtensionDevelopment && !this.environmentService.extensionTestsLocationURI
-			) {
-				viewContainerToRestore = this.storageService.get(SidebarPart.activeViewletSettingsKey, StorageScope.WORKSPACE, this.viewDescriptorService.getDefaultViewContainer(ViewContainerLocation.Sidebar)?.id);
-			} else {
-				viewContainerToRestore = this.viewDescriptorService.getDefaultViewContainer(ViewContainerLocation.Sidebar)?.id;
-			}
-
-			if (viewContainerToRestore) {
-				this.state.initialization.views.containerToRestore.sideBar = viewContainerToRestore;
-			} else {
-				this.stateModel.setRuntimeValue(LayoutStateKeys.SIDEBAR_HIDDEN, true);
-			}
-		}
+		// Do not restore any sidebar viewlet by default
+		// (intentionally left blank)
 
 		// Panel View Container To Restore
 		if (this.isVisible(Parts.PANEL_PART)) {
@@ -2767,7 +2749,7 @@ const LayoutStateKeys = {
 
 	// Part Visibility
 	ACTIVITYBAR_HIDDEN: new RuntimeStateKey<boolean>('activityBar.hidden', StorageScope.WORKSPACE, StorageTarget.MACHINE, false, true),
-	SIDEBAR_HIDDEN: new RuntimeStateKey<boolean>('sideBar.hidden', StorageScope.WORKSPACE, StorageTarget.MACHINE, false),
+	SIDEBAR_HIDDEN: new RuntimeStateKey<boolean>('sideBar.hidden', StorageScope.WORKSPACE, StorageTarget.MACHINE, true),
 	EDITOR_HIDDEN: new RuntimeStateKey<boolean>('editor.hidden', StorageScope.WORKSPACE, StorageTarget.MACHINE, false),
 	PANEL_HIDDEN: new RuntimeStateKey<boolean>('panel.hidden', StorageScope.WORKSPACE, StorageTarget.MACHINE, true),
 	AUXILIARYBAR_HIDDEN: new RuntimeStateKey<boolean>('auxiliaryBar.hidden', StorageScope.WORKSPACE, StorageTarget.MACHINE, true),

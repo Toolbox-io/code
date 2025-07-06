@@ -622,9 +622,13 @@ export abstract class AbstractPaneCompositePart extends CompositePart<PaneCompos
 
 	private layoutEmptyMessage(): void {
 		const visible = !this.getActiveComposite();
-		this.element.classList.toggle('empty', visible);
-		if (visible) {
-			this.titleLabel?.updateTitle('', '');
+		if (this.emptyPaneMessageElement) {
+			this.emptyPaneMessageElement.style.display = visible ? '' : 'none';
+		}
+		// Hide the content area if empty, but keep the composite bar/menu visible
+		const contentArea = this.getContentArea();
+		if (contentArea) {
+			contentArea.style.display = visible ? 'none' : '';
 		}
 	}
 

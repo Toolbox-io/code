@@ -206,7 +206,7 @@ const registry = Registry.as<IConfigurationRegistry>(ConfigurationExtensions.Con
 			'workbench.editor.tabSizing': {
 				'type': 'string',
 				'enum': ['fit', 'shrink', 'fixed'],
-				'default': 'fit',
+				'default': 'shrink',
 				'enumDescriptions': [
 					localize('workbench.editor.tabSizing.fit', "Always keep tabs large enough to show the full editor label."),
 					localize('workbench.editor.tabSizing.shrink', "Allow tabs to get smaller when the available space is not enough to show all tabs at once."),
@@ -229,13 +229,13 @@ const registry = Registry.as<IConfigurationRegistry>(ConfigurationExtensions.Con
 			'window.density.editorTabHeight': {
 				'type': 'string',
 				'enum': ['default', 'compact'],
-				'default': 'default',
+				'default': 'compact',
 				'markdownDescription': localize({ comment: ['{0}, {1} will be a setting name rendered as a link'], key: 'workbench.editor.tabHeight' }, "Controls the height of editor tabs. Also applies to the title control bar when {0} is not set to {1}.", '`#workbench.editor.showTabs#`', '`multiple`')
 			},
 			'workbench.editor.pinnedTabSizing': {
 				'type': 'string',
 				'enum': ['normal', 'compact', 'shrink'],
-				'default': 'normal',
+				'default': 'compact',
 				'enumDescriptions': [
 					localize('workbench.editor.pinnedTabSizing.normal', "A pinned tab inherits the look of non pinned tabs."),
 					localize('workbench.editor.pinnedTabSizing.compact', "A pinned tab will show in a compact form with only icon or first letter of the editor name."),
@@ -853,7 +853,7 @@ const registry = Registry.as<IConfigurationRegistry>(ConfigurationExtensions.Con
 					localize('zenMode.showTabs.single', "The active editor is displayed as a single large tab in the editor title area."),
 					localize('zenMode.showTabs.none', "The editor title area is not displayed."),
 				],
-				'default': 'multiple'
+				'default': 'none'
 			},
 			'zenMode.hideStatusBar': {
 				'type': 'boolean',
